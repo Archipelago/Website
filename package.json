@@ -1,0 +1,17 @@
+{
+  "name": "website",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Niovad",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.13.4",
+    "pug": "^2.0.0-beta2"
+  }
+}

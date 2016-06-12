@@ -1,0 +1,4 @@
+{
+  "port": 8081,
+  "api": "http://localhost:8080"
+}
