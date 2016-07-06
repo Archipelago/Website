@@ -20,8 +20,9 @@ app.post('/register', function(req, res) {
 	       function(e, r, b) {
 		 if (r.statusCode === 201)
 		   res.render('home', {notice: 'Account successfully created'});
-		 else
-		   res.render('register', {error: b.message});
+		 else {
+		   res.render('register', {error: JSON.parse(b).message});
+		 }
 	       });
 });
 

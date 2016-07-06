@@ -27,6 +27,18 @@ html(lang='en')
             li
               a(href='#') Fourth link
     .container-fluid
+      if error
+        .row
+          .col-md-6.col-md-offset-1
+            .alert.alert-danger(role='alert')
+              button(type='button' data-dismiss='alert' aria-label='Close').close &times;
+              =error
+      if notice
+        .row
+          .col-md-6.col-md-offset-1
+            .alert.alert-success(role='alert')
+              button(type='button' data-dismiss='alert' aria-label='Close').close &times;
+              =notice
       .row
         main.col-md-8
           block main
