@@ -1,0 +1,20 @@
+form(action='/register' method='post').form-horizontal
+  .form-group
+    label(for='inputRegisterLogin').control-label.col-md-2 Login
+    .col-md-6
+      input(type='text' name='login' required).form-control#inputRegisterLogin
+  .form-group
+    label(for='inputRegisterPassword').control-label.col-md-2 Password
+    .col-md-6
+      input(type='password' name='password' required).form-control#inputRegisterPassword
+  .form-group
+    label(for='inputRegisterEmail').control-label.col-md-2 Email
+    .col-md-6
+      input(type='email' placeholder='optional' name='email').form-control#inputRegisterEmail
+  .form-group
+    label(for='inputRegisterBitmessage').control-label.col-md-2 Bitmessage Address
+    .col-md-6
+      input(type='text' placeholder='optional' name='bm' pattern='^(BM-)?[a-zA-Z0-9]{32,34}$' title='Valid bitmessage address, with or without "BM-" prefix').form-control#inputRegisterBitmessage
+  .form-group
+    .col-md-offset-2.col-md-6
+      button(type='submit').btn.btn-default Register
