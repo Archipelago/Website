@@ -5,7 +5,9 @@ let express = require('express');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 let app = express();
+let Token = require('./token');
 global.config = require(process.env.CONFIG_FILE || './config.json');
+global.token = new Token;
 
 app.set('view engine', 'pug');
 
@@ -38,6 +40,7 @@ app.post('/register', function(req, res) {
 app.post('/login', function(req, res) {
   apiRequest(req, res, 'post', '/login', function(e, r, b) {
     if (r.statusCode === 200) {
+      token.authenticate(JSON.parse(b).token, req.body.login);
       res.cookie('Token', JSON.parse(b).token);
       res.viewData.connected = true;
       res.viewData.notices.push('You successfully logged in');
