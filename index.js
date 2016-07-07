@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-let request = require('request');
+let api_request = require('./api_request');
 let express = require('express');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
@@ -15,28 +15,23 @@ app.use(cookieParser());
 app.use(express.static('./public'));
 
 app.post('/register', function(req, res) {
-  request.post({url: 'http://localhost:8080/register',
-		form: JSON.stringify(req.body)},
-	       function(e, r, b) {
-		 if (r.statusCode === 201)
-		   res.render('home', {notice: 'Account successfully created'});
-		 else {
-		   res.render('register', {error: JSON.parse(b).message});
-		 }
-	       });
+  api_request(req, 'post', '/register', function(e, r, b) {
+    if (r.statusCode === 201)
+      res.render('home', {notice: 'Account successfully created'});
+    else
+      res.render('register', {error: JSON.parse(b).message});
+  });
 });
 
 app.post('/login', function(req, res) {
-  request.post({url: 'http://localhost:8080/login',
-		form: JSON.stringify(req.body)},
-	       function(e, r, b) {
-		 if (r.statusCode === 200) {
-		   res.cookie('Token', JSON.parse(b).token);
-		   res.render('home', {notice: 'You successfully logged in'});
-		 }
-		 else
-		   res.render('register', {error: JSON.parse(b).message});
-	       });
+  api_request(req, 'post', '/login', function(e, r, b) {
+    if (r.statusCode === 200) {
+      res.cookie('Token', JSON.parse(b).token);
+      res.render('home', {notice: 'You successfully logged in'});
+    }
+    else
+      res.render('register', {error: JSON.parse(b).message});
+  });
 });
 
 app.get(['/register', '/login'], function(req, res) {
