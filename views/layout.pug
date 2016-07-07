@@ -43,6 +43,9 @@ html(lang='en')
       .row
         #left.col-md-3.hidden-xs.hidden-sm
           block left
+            if !connected
+              include parts/register_form
+              include parts/login_form
         main.col-md-5.col-sm-7
           block main
         .col-md-4.col-sm-5
