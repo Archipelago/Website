@@ -26,7 +26,20 @@ app.post('/register', function(req, res) {
 	       });
 });
 
-app.get('/register', function(req, res) {
+app.post('/login', function(req, res) {
+  request.post({url: 'http://localhost:8080/login',
+		form: JSON.stringify(req.body)},
+	       function(e, r, b) {
+		 if (r.statusCode === 200) {
+		   res.cookie('Token', JSON.parse(b).token);
+		   res.render('home', {notice: 'You successfully logged in'});
+		 }
+		 else
+		   res.render('register', {error: JSON.parse(b).message});
+	       });
+});
+
+app.get(['/register', '/login'], function(req, res) {
   res.render('register');
 });
 
