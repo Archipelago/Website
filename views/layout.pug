@@ -27,13 +27,13 @@ html(lang='en')
             li
               a(href='#') Fourth link
     .container-fluid
-      if error
+      each error in errors
         .row
           .col-md-6.col-md-offset-1
             .alert.alert-danger(role='alert')
               button(type='button' data-dismiss='alert' aria-label='Close').close &times;
               =error
-      if notice
+      each notice in notices
         .row
           .col-md-6.col-md-offset-1
             .alert.alert-success(role='alert')

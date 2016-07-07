@@ -14,7 +14,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static('./public'));
 app.use(function(req, res, next) {
-  res.viewData = {};
+  res.viewData = {
+    errors: [],
+    notices: []
+  };
   res.renderView = function(view, data) {
     res.render(view, Object.assign(res.viewData, data));
   };
@@ -22,23 +25,26 @@ app.use(function(req, res, next) {
 });
 
 app.post('/register', function(req, res) {
-  api_request(req, 'post', '/register', function(e, r, b) {
-    if (r.statusCode === 201)
-      res.renderView('home', {notice: 'Account successfully created'});
+  api_request(req, res, 'post', '/register', function(e, r, b) {
+    if (r.statusCode === 201) {
+      res.viewData.notices.push('You successfully logged in');
+      res.renderView('home');
+    }
     else
-      res.renderView('register', {error: JSON.parse(b).message});
+      res.renderView('register');
   });
 });
 
 app.post('/login', function(req, res) {
-  api_request(req, 'post', '/login', function(e, r, b) {
+  api_request(req, res, 'post', '/login', function(e, r, b) {
     if (r.statusCode === 200) {
       res.cookie('Token', JSON.parse(b).token);
       res.viewData.connected = true;
-      res.renderView('home', {notice: 'You successfully logged in'});
+      res.viewData.notices.push('You successfully logged in');
+      res.renderView('home');
     }
     else
-      res.renderView('register', {error: JSON.parse(b).message});
+      res.renderView('register');
   });
 });
 
