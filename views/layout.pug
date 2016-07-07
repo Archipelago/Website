@@ -30,20 +30,22 @@ html(lang='en')
     .container-fluid
       each error in errors
         .row
-          .col-md-6.col-md-offset-1
+          .col-md-6.col-md-offset-3
             .alert.alert-danger(role='alert')
               button(type='button' data-dismiss='alert' aria-label='Close').close &times;
               =error
       each notice in notices
         .row
-          .col-md-6.col-md-offset-1
+          .col-md-6.col-md-offset-3
             .alert.alert-success(role='alert')
               button(type='button' data-dismiss='alert' aria-label='Close').close &times;
               =notice
       .row
-        main.col-md-8
+        #left.col-md-3.hidden-xs.hidden-sm
+          block left
+        main.col-md-5.col-sm-7
           block main
-        .col-md-4
+        .col-md-4.col-sm-5
           .row
             #right.col-md-12
               block right
