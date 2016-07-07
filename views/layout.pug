@@ -25,8 +25,9 @@ html(lang='en')
               a(href='#') Second link
             li
               a(href='#') Third link
-            li
-              a(href='#') Fourth link
+            if !connected
+              li.visible-xs.visible-sm
+                a(href='/register') Register/login
     .container-fluid
       each error in errors
         .row
