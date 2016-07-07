@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-let api_request = require('./api_request');
+let apiRequest = require('./api_request');
 let express = require('express');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
@@ -25,7 +25,7 @@ app.use(function(req, res, next) {
 });
 
 app.post('/register', function(req, res) {
-  api_request(req, res, 'post', '/register', function(e, r, b) {
+  apiRequest(req, res, 'post', '/register', function(e, r, b) {
     if (r.statusCode === 201) {
       res.viewData.notices.push('You successfully logged in');
       res.renderView('home');
@@ -36,7 +36,7 @@ app.post('/register', function(req, res) {
 });
 
 app.post('/login', function(req, res) {
-  api_request(req, res, 'post', '/login', function(e, r, b) {
+  apiRequest(req, res, 'post', '/login', function(e, r, b) {
     if (r.statusCode === 200) {
       res.cookie('Token', JSON.parse(b).token);
       res.viewData.connected = true;
