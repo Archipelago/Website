@@ -1,0 +1,8 @@
+.row
+  each movie in movies
+    .col-lg-3.col-sm-4(style='padding: 0px')
+      a(href='/movie/' + movie.id)
+        if (movie.image)
+          img(src=movie.image alt=movie.title style='width: 100%')
+        else
+          p=movie.title

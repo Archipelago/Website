@@ -56,5 +56,9 @@ app.get(['/register', '/login'], function(req, res) {
 });
 
 app.get('/', function(req, res) {
-  res.renderView('home');
+  apiRequest(req, res, 'get', '/movies/last/15', function(e, r, b) {
+    if (r.statusCode === 200) {
+      res.renderView('home', {movies: JSON.parse(b)});
+    }
+  });
 });
