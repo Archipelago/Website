@@ -30,7 +30,11 @@ app.post('/register', function(req, res) {
   apiRequest(req, res, 'post', '/register', function(e, r, b) {
     if (r.statusCode === 201) {
       res.viewData.notices.push('You successfully logged in');
-      res.renderView('home');
+      apiRequest(req, res, 'get', '/movies/last/15', function(e, r, b) {
+	if (r.statusCode === 200) {
+	  res.renderView('home', {movies: JSON.parse(b)});
+	}
+      });
     }
     else
       res.renderView('register');
@@ -44,7 +48,11 @@ app.post('/login', function(req, res) {
       res.cookie('Token', JSON.parse(b).token);
       res.viewData.connected = true;
       res.viewData.notices.push('You successfully logged in');
-      res.renderView('home');
+      apiRequest(req, res, 'get', '/movies/last/15', function(e, r, b) {
+	if (r.statusCode === 200) {
+	  res.renderView('home', {movies: JSON.parse(b)});
+	}
+      });
     }
     else
       res.renderView('register');
