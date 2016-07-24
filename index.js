@@ -18,7 +18,8 @@ app.use(express.static('./public'));
 app.use(function(req, res, next) {
   res.viewData = {
     errors: [],
-    notices: []
+    notices: [],
+    connected: token.isAuthenticated(req)
   };
   res.renderView = function(view, data) {
     res.render(view, Object.assign(res.viewData, data));
