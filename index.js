@@ -15,17 +15,7 @@ app.listen(process.env.PORT || config.port);
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static('./public'));
-app.use(function(req, res, next) {
-  res.viewData = {
-    errors: [],
-    notices: [],
-    connected: token.isAuthenticated(req)
-  };
-  res.renderView = function(view, data) {
-    res.render(view, Object.assign(res.viewData, data));
-  };
-  next();
-});
+app.use(token.mid);
 
 app.post('/register', function(req, res) {
   apiRequest(req, res, 'post', '/register', function(e, r, b) {
@@ -45,10 +35,8 @@ app.post('/register', function(req, res) {
 app.post('/login', function(req, res) {
   apiRequest(req, res, 'post', '/login', function(e, r, b) {
     if (r.statusCode === 200) {
-      token.authenticate(JSON.parse(b).token, req.body.login);
-      res.cookie('Token', JSON.parse(b).token);
-      res.viewData.connected = true;
-      res.viewData.notices.push('You successfully logged in');
+      token.authenticate(req, JSON.parse(b).token, req.body.login);
+      token.setMessage(req, 'success', 'You successfully logged in');
       apiRequest(req, res, 'get', '/movies/last/15', function(e, r, b) {
 	if (r.statusCode === 200) {
 	  res.renderView('home', {movies: JSON.parse(b)});

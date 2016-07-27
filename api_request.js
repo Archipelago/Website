@@ -5,7 +5,7 @@ module.exports = function(req, res, type, route, cb) {
 		 form: JSON.stringify(req.body)},
 		function(e, r, b) {
 		  if (r.statusCode / 100 === 4)
-		    res.viewData.errors.push(JSON.parse(b).message);
+		    token.setMessage(req, 'error', JSON.parse(b).message);
 		  res.statusCode = r.statusCode;
 		  cb(e, r, b);
 		});
