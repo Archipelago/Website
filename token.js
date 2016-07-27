@@ -11,7 +11,7 @@ module.exports = function() {
   }
 
   this.isAuthenticated = function(req) {
-    return tokens[req.cookies.Token] !== undefined;
+    return tokens[req.cookies.Token].connected;
   }
 
   this.checkAuthentication = function(req, res, next) {
