@@ -20,7 +20,7 @@ module.exports = function() {
 	|| tokens[req.cookies.Token].connected !== true) {
       res.statusCode = 401;
       tokens[req.cookies.Token].messages.errors.push('You need to be logged in to access this page');
-      res.renderView('/register'); // TODO: make a redirection instead
+      res.redirect('/register');
     }
     else
       next(req, res);

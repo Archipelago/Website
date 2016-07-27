@@ -20,12 +20,8 @@ app.use(token.mid);
 app.post('/register', function(req, res) {
   apiRequest(req, res, 'post', '/register', function(e, r, b) {
     if (r.statusCode === 201) {
-      res.viewData.notices.push('You successfully logged in');
-      apiRequest(req, res, 'get', '/movies/last/15', function(e, r, b) {
-	if (r.statusCode === 200) {
-	  res.renderView('home', {movies: JSON.parse(b)});
-	}
-      });
+      res.viewData.notices.push('You successfully registered');
+      res.redirect('/');
     }
     else
       res.renderView('register');
@@ -37,11 +33,7 @@ app.post('/login', function(req, res) {
     if (r.statusCode === 200) {
       token.authenticate(req, JSON.parse(b).token, req.body.login);
       token.setMessage(req, 'success', 'You successfully logged in');
-      apiRequest(req, res, 'get', '/movies/last/15', function(e, r, b) {
-	if (r.statusCode === 200) {
-	  res.renderView('home', {movies: JSON.parse(b)});
-	}
-      });
+      res.redirect('/');
     }
     else
       res.renderView('register');
