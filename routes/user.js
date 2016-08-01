@@ -4,7 +4,7 @@ module.exports = function(app) {
   app.post('/register', function(req, res) {
     apiRequest(req, res, 'post', '/register', function(e, r, b) {
       if (r.statusCode === 201) {
-	res.viewData.notices.push('You successfully registered');
+	token.setMessage(req, 'success', 'You successfully registered');
 	res.redirect('/');
       }
       else
