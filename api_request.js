@@ -6,7 +6,8 @@ module.exports = function(req, res, type, route, cb) {
 		function(e, r, b) {
 		  if (r.statusCode / 100 === 4)
 		    token.setMessage(req, 'error', JSON.parse(b).message);
-		  res.statusCode = r.statusCode;
+		  else if (r.statusCode !== 200)
+		    res.statusCode = r.statusCode;
 		  cb(e, r, b);
 		});
 }

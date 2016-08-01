@@ -17,5 +17,5 @@ app.use(express.static('./public'));
 app.use(token.mid);
 
 require('./routes/user.js')(app);
-require('./routes/misc.js')(app);
 require('./routes/movie.js')(app);
+require('./routes/misc.js')(app);
