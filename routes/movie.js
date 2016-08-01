@@ -15,8 +15,10 @@ module.exports = function(app) {
 	movie.data = b;
 	res.renderView('movie', {movie: movie});
       }
-      else
+      else {
+	token.setMessage(req, 'error', b.message);
 	res.renderDefaultPage(req, res);
+      }
     });
   });
 }
