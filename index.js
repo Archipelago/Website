@@ -27,10 +27,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-
-require('./routes/user.js')(app);
-require('./routes/movie.js')(app);
-require('./routes/misc.js')(app);
+require('./routes')(app);
 
 app.use(function(req, res, next) {
   res.statusCode = 404;
