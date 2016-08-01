@@ -16,7 +16,7 @@ module.exports = function(app) {
 	res.renderView('movie', {movie: movie});
       }
       else
-	res.redirect('/'); // DO NOT DO THIS ON 404
+	res.renderDefaultPage(req, res);
     });
   });
 }
