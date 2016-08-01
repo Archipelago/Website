@@ -1,0 +1,12 @@
+extends layout
+
+block left
+  img(src=movie.image alt='Movie poster' style='max-width: 100%')
+
+block main
+  h1=movie.title
+  for value, name in movie.data
+    p
+      strong=name
+      | : 
+      =value
