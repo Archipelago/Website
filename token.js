@@ -54,12 +54,13 @@ module.exports = function() {
     }
 
     res.renderView = function(view, data = {}) {
-      tokens[req.Token].message = {
+      let msgs = tokens[req.Token].messages;
+      tokens[req.Token].messages = {
 	success: [],
 	error: []
       }
       data.connected = tokens[req.Token].connected;
-      res.render(view, Object.assign(tokens[req.Token].messages, data));
+      res.render(view, Object.assign(msgs, data));
     }
     next();
   }
