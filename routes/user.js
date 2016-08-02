@@ -15,7 +15,7 @@ module.exports = function(app) {
   app.post('/login', function(req, res) {
     apiRequest(req, res, 'post', '/login', function(e, r, b) {
       if (r.statusCode === 200) {
-	token.authenticate(req, JSON.parse(b).token, req.body.login);
+	token.authenticate(req, b.token, req.body.login);
 	token.setMessage(req, 'success', 'You successfully logged in');
 	res.redirect('/');
       }

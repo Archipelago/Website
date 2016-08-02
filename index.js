@@ -20,7 +20,7 @@ app.use(function(req, res, next) {
   res.renderDefaultPage = function(req, res) {
     apiRequest(req, res, 'get', '/movies/last/15', function(e, r, b) {
       if (r.statusCode === 200) {
-	res.renderView('home', {movies: JSON.parse(b)});
+	res.renderView('home', {movies: b});
       }
     });
   };
