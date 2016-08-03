@@ -1,21 +1,32 @@
+let async = require('async');
 let apiRequest = require('../api_request');
 
 module.exports = function(app) {
   // TODO: we must also retrieve releases and links
   app.get('/movie/:id', function(req, res) {
-    apiRequest(req, res, 'get', '/movie/' + req.params.id, function(e, r, b) {
+    apiRequest(req, res, 'get', '/movie/' + req.params.id, function(e, r, bodyMovie) {
       if (r.statusCode === 200) {
 	let movie = {
-	  image: b.image,
-	  title: b.title
+	  image: bodyMovie.image,
+	  title: bodyMovie.title
 	};
-	delete b.image;
-	delete b.title;
-	movie.data = b;
-	res.renderView('movie', {movie: movie});
+	delete bodyMovie.image;
+	delete bodyMovie.title;
+	movie.data = bodyMovie;
+	apiRequest(req, res, 'get', '/movie/' + req.params.id + '/releases', function(e, r, releases) {
+	  async.each(releases, function(release, cb) {
+	    apiRequest(req, res, 'get', '/video_release/' + release.id + '/links', function(e, r, links) {
+	      release.links = links;
+	      cb();
+	    });
+	  }, function() {
+	    movie.releases = releases;
+	    res.renderView('movie', {movie: movie});
+	  });
+	});
       }
       else {
-	token.setMessage(req, 'error', b.message);
+	token.setMessage(req, 'error', bodyMovie.message);
 	res.renderDefaultPage(req, res);
       }
     });
