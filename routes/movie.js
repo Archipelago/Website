@@ -2,7 +2,6 @@ let async = require('async');
 let apiRequest = require('../api_request');
 
 module.exports = function(app) {
-  // TODO: we must also retrieve releases and links
   app.get('/movie/:id', function(req, res) {
     apiRequest(req, res, 'get', '/movie/' + req.params.id, function(e, r, bodyMovie) {
       if (r.statusCode === 200) {
