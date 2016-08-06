@@ -22,6 +22,8 @@ app.use(function(req, res, next) {
       if (r.statusCode === 200) {
 	res.renderView('home', {movies: b});
       }
+      else
+	res.renderView('home', {movies: []});
     });
   };
   next();
