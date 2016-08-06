@@ -1,4 +1,5 @@
 let crypto = require('crypto');
+let apiRequest = require('./api_request');
 
 module.exports = function() {
   // token: login, remote, messages, connected
@@ -8,10 +9,24 @@ module.exports = function() {
     tokens[req.Token].remote = token;
     tokens[req.Token].login = login.trim;
     tokens[req.Token].connected = true;
+    apiRequest(req, {}, 'get', '/user', function(e, r, b) {
+      tokens[req.Token].permissions = b.permissions;
+    });
   }
 
   this.isAuthenticated = function(req) {
     return tokens[req.Token].connected;
+  }
+
+  this.getPermissions = function(req) {
+    if (this.isAuthenticated(req))
+      return [];
+    else
+      return tokens[req.Token].permissions;
+  }
+
+  this.getRemoteToken = function(req) {
+    return tokens[req.Token].remote;
   }
 
   this.checkAuthentication = function(req, res, next) {
