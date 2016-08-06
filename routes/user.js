@@ -31,6 +31,9 @@ module.exports = function(app) {
   });
 
   app.get(['/register', '/login'], function(req, res) {
-    res.renderView('register');
+    if (token.isAuthenticated(req))
+      res.redirect('/');
+    else
+      res.renderView('register');
   });
 }
