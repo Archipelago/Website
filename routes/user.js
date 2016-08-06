@@ -5,7 +5,7 @@ module.exports = function(app) {
     apiRequest(req, res, 'post', '/register', function(e, r, b) {
       if (r.statusCode === 201) {
 	token.setMessage(req, 'success', 'You successfully registered');
-	res.redirect('/');
+	res.redirect(token.getLastPage(req));
       }
       else
 	res.renderView('register');
@@ -23,7 +23,7 @@ module.exports = function(app) {
       if (r.statusCode === 200) {
 	token.authenticate(req, b.token, req.body.login);
 	token.setMessage(req, 'success', 'You successfully logged in');
-	res.redirect('/');
+	res.redirect(token.getLastPage(req));
       }
       else
 	res.renderView('register');
