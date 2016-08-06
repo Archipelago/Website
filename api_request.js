@@ -2,7 +2,7 @@ let request = require('request');
 
 module.exports = function(req, res, type, route, cb) {
   let options = {
-    url: ('http://localhost:8080' + route),
+    url: (config.api + route),
     form: JSON.stringify(req.body),
     headers: {}
   };
