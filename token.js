@@ -7,7 +7,7 @@ module.exports = function() {
 
   this.authenticate = function(req, token, login) {
     tokens[req.Token].remote = token;
-    tokens[req.Token].login = login.trim;
+    tokens[req.Token].login = login.trim();
     tokens[req.Token].connected = true;
     apiRequest(req, {}, 'get', '/user', function(e, r, b) {
       tokens[req.Token].permissions = b.permissions;
