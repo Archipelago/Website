@@ -88,7 +88,7 @@ module.exports = function() {
 	success: [],
 	error: []
       };
-      tokens[req.Token].lastPage = req._parsedOriginalUrl.path;
+      tokens[req.Token].lastPage = req.originalUrl;
       data.connected = tokens[req.Token].connected;
       res.render(view, Object.assign(msgs, data));
     }

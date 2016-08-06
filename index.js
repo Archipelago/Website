@@ -31,6 +31,6 @@ require('./routes')(app);
 
 app.use(function(req, res, next) {
   res.statusCode = 404;
-  token.setMessage(req, 'error', 'Page ' + req._parsedOriginalUrl.path + ' does not exist');
+  token.setMessage(req, 'error', 'Page ' + req.originalUrl + ' does not exist');
   res.renderDefaultPage(req, res);
 });
