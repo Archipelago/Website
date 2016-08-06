@@ -14,6 +14,15 @@ module.exports = function() {
     });
   }
 
+  this.logout = function(req) {
+    if (this.isAuthenticated(req)) {
+      tokens[req.Token].connected = false;
+      tokens[req.Token].permissions = [];
+      delete tokens[req.Token].remote;
+      delete tokens[req.Token].login;
+    }
+  }
+
   this.isAuthenticated = function(req) {
     return tokens[req.Token].connected;
   }
@@ -27,6 +36,10 @@ module.exports = function() {
 
   this.getRemoteToken = function(req) {
     return tokens[req.Token].remote;
+  }
+
+  this.getLastPage = function(req) {
+    return tokens[req.Token].lastPage;
   }
 
   this.checkAuthentication = function(req, res, next) {
@@ -62,6 +75,7 @@ module.exports = function() {
 	  success: [],
 	  error: []
 	},
+	lastPage: '/',
 	connected: false
       };
       req.Token = newToken;
@@ -73,7 +87,8 @@ module.exports = function() {
       tokens[req.Token].messages = {
 	success: [],
 	error: []
-      }
+      };
+      tokens[req.Token].lastPage = req._parsedOriginalUrl.path;
       data.connected = tokens[req.Token].connected;
       res.render(view, Object.assign(msgs, data));
     }

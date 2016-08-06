@@ -29,6 +29,9 @@ html(lang='en')
             if !connected
               li.visible-xs.visible-sm
                 a(href='/register') Register/login
+            else
+              li
+                a(href='/logout') Logout
     .container-fluid
       each msg in error
         .row

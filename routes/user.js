@@ -12,6 +12,12 @@ module.exports = function(app) {
     });
   });
 
+  app.get('/logout', function(req, res) {
+    token.logout(req);
+    token.setMessage(req, 'success', 'You logged out');
+    res.redirect(token.getLastPage(req));
+  });
+
   app.post('/login', function(req, res) {
     apiRequest(req, res, 'post', '/login', function(e, r, b) {
       if (r.statusCode === 200) {
