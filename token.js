@@ -19,7 +19,7 @@ module.exports = function() {
   }
 
   this.getPermissions = function(req) {
-    if (this.isAuthenticated(req))
+    if (!this.isAuthenticated(req))
       return [];
     else
       return tokens[req.Token].permissions;
