@@ -4,8 +4,15 @@ module.exports = function(app) {
   app.post('/register', function(req, res) {
     apiRequest(req, res, 'post', '/register', function(e, r, b) {
       if (r.statusCode === 201) {
-	token.setMessage(req, 'success', 'You successfully registered');
-	res.redirect(token.getLastPage(req));
+	apiRequest(req, req, 'post', '/login', function(e, r, b) {
+	  if (r.statusCode === 200) {
+	    token.setMessage(req, 'success', 'You successfully registered. You are now logged in');
+	    token.authenticate(req, b.token, req.body.login);
+	    res.redirect(token.getLastPage(req));
+	  }
+	  else
+	    res.renderView('register');
+	});
       }
       else
 	res.renderView('register');
