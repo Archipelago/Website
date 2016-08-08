@@ -10,6 +10,7 @@ global.config = require(process.env.CONFIG_FILE || './config.json');
 global.token = new Token;
 
 app.set('view engine', 'pug');
+app.set('x-powered-by', false);
 
 app.listen(process.env.PORT || config.port);
 app.use(bodyParser.urlencoded({extended: false}));
