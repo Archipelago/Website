@@ -1,15 +1,16 @@
 extends layout
 
-block left
-  img(src=movie.image alt='Movie poster' style='max-width: 100%')
-
 block main
-  h1=movie.title
-  for value, name in movie.data
-    p
-      strong=name
-      | : 
-      =value
+  .row
+    .col-md-4.hidden-sm.hidden-xs
+      img(src=movie.image alt='Movie poster' style='max-width: 100%')
+    .col-md-8
+      h1=movie.title
+      for value, name in movie.data
+        p
+          strong=name
+          | : 
+          =value
 
 block right
   h1 Links
