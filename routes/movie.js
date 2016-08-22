@@ -30,4 +30,9 @@ module.exports = function(app) {
       }
     });
   });
+
+  app.get('/movie', function(req, res) {
+    // TODO: redirect if permissions failure
+    res.renderView('movie_add', {currentYear: (new Date).getFullYear()});
+  });
 }
