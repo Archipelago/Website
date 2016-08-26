@@ -25,7 +25,6 @@ module.exports = function(app) {
 	});
       }
       else {
-	token.setMessage(req, 'error', bodyMovie.message);
 	res.renderDefaultPage(req, res);
       }
     });
@@ -34,5 +33,17 @@ module.exports = function(app) {
   app.get('/movie', function(req, res) {
     // TODO: redirect if permissions failure
     res.renderView('movie_add', {currentYear: (new Date).getFullYear()});
+  });
+
+  app.post('/movie', function(req, res) {
+    apiRequest(req, res, 'post', '/movie', function(e, r, b) {
+      if (r.statusCode === 201) {
+	token.setMessage(req, 'success', 'Movie "' + req.body.title + '" successfully added');
+	res.renderDefaultPage(req, res);
+      }
+      else {
+	res.renderView('movie_add', {currentYear: (new Date).getFullYear()});
+      }
+    });
   });
 }

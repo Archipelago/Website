@@ -18,7 +18,7 @@ module.exports = function(req, res, type, route, cb) {
     }
     else {
       b = JSON.parse(b);
-      if (r.statusCode / 100 === 4)
+      if (parseInt(r.statusCode / 100) === 4)
 	token.setMessage(req, 'error', b.message);
       else if (r.statusCode !== 200)
 	res.statusCode = r.statusCode;
