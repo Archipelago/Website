@@ -14,6 +14,7 @@ block main
 
 block right
   h1 Links
+  a(href='/movie/' + id +  '/release').permission-add-release Add a release
   p NB: this does not work well without javascript
   for release in movie.releases
     if (release.links instanceof Array && release.links.length > 0)

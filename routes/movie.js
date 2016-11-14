@@ -20,7 +20,7 @@ module.exports = function(app) {
 	    });
 	  }, function() {
 	    movie.releases = releases;
-	    res.renderView('movie', {movie: movie});
+	    res.renderView('movie', {movie: movie, id: req.params.id});
 	  });
 	});
       }
