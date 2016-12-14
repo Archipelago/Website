@@ -3,6 +3,17 @@ extends layout
 block main
   h1 Add a release for $MOVIE_TITLE
   form(method='post' action='/movie/' + movie_id + '/release').form-horizontal
+    button(type='button').btn.btn-default#addLink Add a set of links
+    #setOfLinks
+      .form-group
+        .col-sm-3
+          label(for='setOfLinks1').control-label Set of links #1 &nbsp;
+          select
+            - let i = 1
+            while i < 10
+              option(value=i)=i++
+        .col-sm-8
+          textarea(name='links|1' style='height: 2.5em' required).form-control#setOfLinks1
     .form-group
       label(for='inputReleaseName').control-label.col-sm-3 Name
       .col-sm-8
