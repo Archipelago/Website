@@ -30,32 +30,37 @@ block main
     .form-group
       label(for='inputMovieGender').control-label.col-sm-3 Gender(s)
       .col-sm-8
-        input(type='type' name='gender').form-control#inputMovieGender
+        input(type='text' name='gender').form-control#inputMovieGender
         p.help-block comma-separated
     .form-group
       label(for='inputMovieDirector').control-label.col-sm-3 Director(s)
       .col-sm-8
-        input(type='type' name='director').form-control#inputMovieDirector
+        input(type='text' name='director').form-control#inputMovieDirector
         p.help-block comma-separated
     .form-group
       label(for='inputMovieProducer').control-label.col-sm-3 Producer(s)
       .col-sm-8
-        input(type='type' name='producer').form-control#inputMovieProducer
+        input(type='text' name='producer').form-control#inputMovieProducer
         p.help-block comma-separated
     .form-group
       label(for='inputMovieScriptwriter').control-label.col-sm-3 Scriptwriter(s)
       .col-sm-8
-        input(type='type' name='scriptwriter').form-control#inputMovieScriptwriter
+        input(type='text' name='scriptwriter').form-control#inputMovieScriptwriter
         p.help-block comma-separated
+    .form-group
+      label(for='inputMovieDuration').control-label.col-sm-3 Duration
+      .col-sm-8
+        input(type='text' name='duration' pattern='^\d{1,2}h[0-5]?\dm([0-5]?\ds?)?$').form-control#inputMovieDuration
+        p.help-block Format: 12h34m56s. Seconds can be omitted
     .form-group
       label(for='inputMovieActor').control-label.col-sm-3 Actor(s)
       .col-sm-8
-        input(type='type' name='actor').form-control#inputMovieActor
+        input(type='text' name='actor').form-control#inputMovieActor
         p.help-block comma-separated
     .form-group
       label(for='inputMovieComposer').control-label.col-sm-3 Composer(s)
       .col-sm-8
-        input(type='type' name='composer').form-control#inputMovieComposer
+        input(type='text' name='composer').form-control#inputMovieComposer
         p.help-block comma-separated
     .form-group
       label(for='inputMoviePlot').control-label.col-sm-3 Plot
@@ -69,15 +74,15 @@ block main
     .form-group
       label(for='inputMovieOriginalReleaseDate').control-label.col-sm-3 Original release date
       .col-sm-8
-        input(type='type' name='original_release_date').form-control#inputMovieOriginalReleaseDate
+        input(type='text' name='original_release_date').form-control#inputMovieOriginalReleaseDate
     .form-group
       label(for='inputMovieOriginalTitle').control-label.col-sm-3 Original title
       .col-sm-8
-        input(type='type' name='original_title').form-control#inputMovieOriginalTitle
+        input(type='text' name='original_title').form-control#inputMovieOriginalTitle
     .form-group
       label(for='inputMovieOtherTitle').control-label.col-sm-3 Other title
       .col-sm-8
-        input(type='type' name='other_title').form-control#inputMovieOtherTitle
+        input(type='text' name='other_title').form-control#inputMovieOtherTitle
     .form-group
       label(for='inputMovieInformations').control-label.col-sm-3 Other informations
       .col-sm-8
