@@ -50,7 +50,7 @@ block main
     .form-group
       label(for='inputMovieDuration').control-label.col-sm-3 Duration
       .col-sm-8
-        input(type='text' name='duration' pattern='^\d{1,2}h[0-5]?\dm([0-5]?\ds?)?$').form-control#inputMovieDuration
+        input(type='text' name='duration' pattern='^\d{1,2}h[0-5]?\d(m([0-5]?\ds?)?)?$').form-control#inputMovieDuration
         p.help-block Format: 12h34m56s. Seconds can be omitted
     .form-group
       label(for='inputMovieActor').control-label.col-sm-3 Actor(s)
