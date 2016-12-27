@@ -23,16 +23,16 @@ block right
           a(data-toggle='collapse' href='#release' + release.id aria-expanded='false' aria-controls='release' + release.id)=release.quality + ' ' + release.source + ' ' + release.size + ' ' + release.video_codec
         .collapse(id='release' + release.id)
           .panel-body
-            for link, linkId in release.links
+            for link in release.links
               if (link instanceof Array)
                 .panel.panel-default
                   .panel-heading
                     a(data-toggle='collapse' href='#link' + release.id + '-' + linkId aria-expanded='false' aria-controls='release' + id)=link.length + ' parts (Uptobox)'
-                  .collapse(id='link' + release.id + '-' + linkId)
+                  .collapse(id='link' + release.id + '-' + link.id)
                     .panel-body
                        each l, i in link
                         p
-                          a(href=l)='Uptobox part ' + i
+                          a(href=l.url)='Uptobox part ' + i
               else
                 p
-                  a(href=link) Uptobox
+                  a(href=link.url) Uptobox
