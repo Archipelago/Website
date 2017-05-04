@@ -3,7 +3,9 @@ $(function() {
     let length = $('textarea[id^=setOfLinks]').length + 1;
     let div = '<div class="form-group">'
 	+ '<div class="col-sm-3">'
-	+ '<label for="setOfLinks' + length + '" class="control-label">Set of links #' + length + '</label> &nbsp; <select>';
+	+ '<label for="setOfLinks' + length + '" class="control-label">'
+	+ $('#setOfLinks > div.form-group:first label').text().split(/\s#/)[0]
+	+ ' #' + length + '</label> &nbsp; <select>';
     for (let i = 1; i < 10; ++i) {
       div += '<option value="' + i + '">' + i + '</option>';
     }

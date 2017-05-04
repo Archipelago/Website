@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 let express = require('express');
+let i18n = require('i18n');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 let app = express();
@@ -11,13 +12,22 @@ global.token = new Token;
 
 app.set('view engine', 'pug');
 app.set('x-powered-by', false);
+app.locals.__ = i18n.__;
+
+i18n.configure({directory: __dirname + '/locales',
+		defaultLocale: config.defaultLocale || 'en',
+		updateFiles: false});
 
 app.listen(process.env.PORT || config.port);
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static('./public'));
 app.use(token.mid);
+app.use(i18n.init);
 app.use(function(req, res, next) {
+  req.setLocale(config.defaultLocale);
+  console.log(req.getLocale());
+  app.locals.locale = i18n.getLocale();
   res.renderDefaultPage = function(req, res) {
     apiRequest(req, res, 'get', '/movies/last/15', function(e, r, b) {
       if (r.statusCode === 200) {
