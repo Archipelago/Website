@@ -36,6 +36,10 @@ module.exports = function(app) {
   });
 
   app.post('/movie', function(req, res) {
+    let fields = ['director', 'gender', 'producer', 'scriptwriter', 'actor', 'composer'];
+    for (let i in fields)
+      if (req.body[fields[i]])
+	req.body[fields[i]] = req.body[fields[i]].split(/\s*,\s*/g);
     apiRequest(req, res, 'post', '/movie', function(e, r, b) {
       if (r.statusCode === 201) {
 	token.setMessage(req, 'success', 'Movie "' + req.body.title + '" successfully added');
