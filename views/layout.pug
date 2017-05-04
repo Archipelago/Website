@@ -1,5 +1,5 @@
 doctype html
-html(lang='en')
+html(lang=locale)
   head
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1')
@@ -25,15 +25,15 @@ html(lang='en')
         .collapse.navbar-collapse#navbar.navbar-right
           ul.nav.navbar-nav
             li
-              a(href='#') Movies list
+              a(href='#')=__('Movies list')
             li.permission-add-element
-              a(href='/movie') Add a movie
+              a(href='/movie')=__('Add a movie')
             if !connected
               li.visible-xs.visible-sm
-                a(href='/register') Register/login
+                a(href='/register')=__('Register/Login')
             else
               li
-                a(href='/logout') Logout
+                a(href='/logout')=__('Logout')
     .container-fluid
       each msg in error
         .row

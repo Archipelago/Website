@@ -1,7 +1,7 @@
 extends layout
 
 block main
-  h1 Lists
+  h1=__('Lists')
   each elems, list in lists
-    h3=list
+    h3=__(list)
     p=elems
