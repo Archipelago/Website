@@ -3,7 +3,7 @@ extends layout
 block main
   .row
     .col-md-4.hidden-sm.hidden-xs
-      img(src=movie.image alt='Movie poster' style='max-width: 100%')
+      img(src=movie.image alt=__('Movie poster') style='max-width: 100%')
     .col-md-8
       h1=movie.title
       for value, name in movie.data
