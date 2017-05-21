@@ -32,10 +32,11 @@ module.exports = function(app) {
 
   app.get('/movie', function(req, res) {
     // TODO: redirect if permissions failure
-    res.renderView('movie_add', {currentYear: (new Date).getFullYear()});
+    res.renderView('movie_add', {currentYear: (new Date).getFullYear(), movie: {}});
   });
 
   app.post('/movie', function(req, res) {
+    let raw = JSON.parse(JSON.stringify(req.body));
     let fields = ['director', 'gender', 'producer', 'scriptwriter', 'actor', 'composer'];
     for (let i in fields)
       if (req.body[fields[i]])
@@ -46,7 +47,7 @@ module.exports = function(app) {
 	res.renderDefaultPage(req, res);
       }
       else {
-	res.renderView('movie_add', {currentYear: (new Date).getFullYear()});
+	res.renderView('movie_add', {currentYear: (new Date).getFullYear(), movie: raw});
       }
     });
   });
