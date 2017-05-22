@@ -1,5 +1,24 @@
 extends layout
 
+mixin selectContent(name, list)
+  option(value="")
+    each e in list
+      if e == release[name]
+        option(value=e selected)=e
+      else
+        option(value=e)=e
+
+mixin dropdown(id, name, list, str, required)
+  .form-group
+    label(for=id).control-label.col-sm-3=__(str)
+    .col-sm-8
+      if required
+        select(id=id name=name required)
+          +selectContent(name, list)
+      else
+        select(id=id name=name)
+          +selectContent(name, list)
+
 block main
   h1=__('Add a release for')+' $MOVIE_TITLE'
   form(method='post' action='/movie/' + movie_id + '/release').form-horizontal
@@ -18,63 +37,22 @@ block main
     .form-group
       label(for='inputReleaseName').control-label.col-sm-3=__('Name')
       .col-sm-8
-        input(type='text' name='name' required).form-control#inputReleaseName
+        input(type='text' name='name' value=release.name required).form-control#inputReleaseName
     .form-group
       label(for='inputReleaseSize').control-label.col-sm-3=__('Size')
       .col-sm-8
-        input(type='text' name='size' required).form-control#inputReleaseSize
-    .form-group
-      label(for='inputReleaseLanguage').control-label.col-sm-3=__('Language')
-      .col-sm-8
-        select(name="language" required)#inputReleaseLanguage
-          option(value="")
-          each e in lists.languages
-            option(value=e)=e
-    .form-group
-      label(for='inputReleaseAudioCodec').control-label.col-sm-3=__('Audio codec')
-      .col-sm-8
-        select(name="audio_codec" required)#inputReleaseAudioCodec
-          option(value="")
-          each e in lists.audio_codecs
-            option(value=e)=e
-    .form-group
-      label(for='inputReleaseVideoCodec').control-label.col-sm-3=__('Video codec')
-      .col-sm-8
-        select(name="video_codec" required)#inputReleaseVideoCodec
-          option(value="")
-          each e in lists.video_codecs
-            option(value=e)=e
-    .form-group
-      label(for='inputReleaseSource').control-label.col-sm-3=__('Source')
-      .col-sm-8
-        select(name="source" required)#inputReleaseSource
-          option(value="")
-          each e in lists.sources
-            option(value=e)=e
-    .form-group
-      label(for='inputReleaseQuality').control-label.col-sm-3=__('Quality')
-      .col-sm-8
-        select(name="quality" required)#inputReleaseQuality
-          option(value="")
-          each e in lists.qualities
-            option(value=e)=e
-    .form-group
-      label(for='inputReleaseContainer').control-label.col-sm-3=__('Container')
-      .col-sm-8
-        select(name="container" required)#inputReleaseContainer
-          option(value="")
-          each e in lists.containers
-            option(value=e)=e
-    .form-group
-      label(for='inputReleaseCompression').control-label.col-sm-3=__('Compression')
-      .col-sm-8
-        select(name="compression")#inputReleaseCompression
-          option(value="")
-          each e in lists.compressions
-            option(value=e)=e
+        input(type='text' name='size' value=release.size required).form-control#inputReleaseSize
+    +dropdown('inputReleaseLanguage', 'language', lists.languages, 'Language', true)
+    +dropdown('inputReleaseAudioCodec', 'audio_codec', lists.audio_codecs, 'Audio codec', true)
+    +dropdown('inputReleaseVideoCodec', 'video_codec', lists.video_codecs, 'Video codec', true)
+    +dropdown('inputReleaseSource', 'source', lists.sources, 'Source', true)
+    +dropdown('inputReleaseQuality', 'quality', lists.qualities, 'Quality', true)
+    +dropdown('inputReleaseContainer', 'container', lists.containers, 'Container', true)
+    +dropdown('inputReleaseCompression', 'compression', lists.compressions, 'Compression', false)
     .form-group
       label(for='inputReleaseInformations').control-label.col-sm-3=__('Other informations')
       .col-sm-8
         textarea(rows='2', cols='30' name='informations').form-control#inputReleaseInformations
+          =release.informations
     .form-group(style='text-align: center')
       button(type='submit').btn.btn-default=__('Add release')
