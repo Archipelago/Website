@@ -84,6 +84,8 @@ module.exports = function() {
 
     res.renderView = function(view, data = {}) {
       let msgs = tokens[req.Token].messages;
+      data.login = data.login || {};
+      data.register = data.register || {};
       tokens[req.Token].messages = {
 	success: [],
 	error: []

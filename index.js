@@ -31,10 +31,10 @@ app.use(function(req, res, next) {
   res.renderDefaultPage = function(req, res) {
     apiRequest(req, res, 'get', '/movies/last/15', function(e, r, b) {
       if (r.statusCode === 200) {
-	res.renderView('home', {movies: b, register: {}, login: {}});
+	res.renderView('home', {movies: b});
       }
       else
-	res.renderView('home', {movies: [], register: {}, login: {}});
+	res.renderView('home', {movies: []});
     });
   };
   next();
