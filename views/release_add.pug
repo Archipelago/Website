@@ -34,6 +34,7 @@ block main
               option(value=i)=i++
         .col-sm-8
           textarea(name='links|1' style='height: 2.5em' required).form-control#setOfLinks1
+            =release['links|1']
     .form-group
       label(for='inputReleaseName').control-label.col-sm-3=__('Name')
       .col-sm-8
