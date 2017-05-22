@@ -26,7 +26,6 @@ app.use(token.mid);
 app.use(i18n.init);
 app.use(function(req, res, next) {
   req.setLocale(config.defaultLocale);
-  console.log(req.getLocale());
   app.locals.locale = i18n.getLocale();
   res.renderDefaultPage = function(req, res) {
     apiRequest(req, res, 'get', '/movies/last/15', function(e, r, b) {
