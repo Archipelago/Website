@@ -11,11 +11,11 @@ module.exports = function(app) {
 	    res.redirect(token.getLastPage(req));
 	  }
 	  else
-	    res.renderView('register');
+	    res.renderView('register', {register: req.body, login: {}});
 	});
       }
       else
-	res.renderView('register');
+	res.renderView('register', {register: req.body, login: {}});
     });
   });
 
@@ -33,7 +33,7 @@ module.exports = function(app) {
 	res.redirect(token.getLastPage(req));
       }
       else
-	res.renderView('register');
+	res.renderView('register', {register: {}, login: req.body});
     });
   });
 
@@ -41,6 +41,6 @@ module.exports = function(app) {
     if (token.isAuthenticated(req))
       res.redirect('/');
     else
-      res.renderView('register');
+      res.renderView('register', {register: {}, login: {}});
   });
 }
